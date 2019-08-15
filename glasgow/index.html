@@ -1,0 +1,72 @@
+<html>
+<html>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<style>
+svg{
+    margin:10px;
+}
+</style>
+<body></body>
+<script>
+const width = 45.5;
+const height = 45.5;
+
+multiExtent = (data, keys)=>{
+  let min;
+  let max;
+  for (let row of data){
+    const values = keys.map(k=>Number(row[k]));
+    console.log(values);
+    const extent = d3.extent(values);
+    console.log(extent)
+    if(!min) {min = extent[0];}
+    if(!max) {max = extent[1];}
+    max = Math.max(max, extent[0]);
+    min = Math.min(min, extent[1]);
+  }
+  return [min, max];
+}
+
+
+d3.csv('population-by-ward.csv')
+  .then(wards=>{
+    const categories = ['0-4','5-11','12-15','16-29','30-44','45-64','65-74','75'];
+    const ext = multiExtent(wards, categories);
+
+    const valueScale = d3.scaleLinear()
+        .domain([0,ext[1]])
+        .range([0, height]);
+
+    const categoryScale = d3.scaleBand()
+        .domain(categories)
+        .range([0, width])
+        .padding(0.3);
+
+    console.log(ext);
+    d3.select('body')
+        .selectAll('svg')
+        .data(wards)
+            .enter()
+        .append('svg')
+            .attr('width',width)
+            .attr('height',height)
+            .attr('id',d=>d.ward)
+        .each(function(ward){
+            const svg = d3.select(this);
+
+            svg.selectAll('rect')
+                .data(categories)
+                    .enter()
+                .append('rect')
+                    .attr('x', d=>categoryScale(d))
+                    .attr('y', d=>height-valueScale(ward[d]))
+                    .attr('width', categoryScale.bandwidth())
+                    .attr('height', d=>{
+                        console.log(ward.ward, d, ward[d], valueScale(ward[d]))
+                        return valueScale(ward[d])
+                    })
+                    .attr('fill', 'black');
+        });
+  });
+</script>
+</html>
