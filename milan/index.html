@@ -1,0 +1,80 @@
+<html>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<body></body>
+<script>
+const symbol = d3.symbol()
+  .type(d3.symbolTriangle)
+  .size(2500);
+const width = 50;
+const height = 50;
+
+const symbolHeight = a=>((a*Math.sqrt(3))/2);
+
+d3.csv('by-zone.csv')
+  .then(zones=>{
+    console.log(zones);
+    const symbolScale = d3.scaleSqrt()
+      .domain([0, 70000])
+      .range([0,400]);
+  
+  
+
+    d3.select('body')
+      .selectAll('svg')
+        .data(zones)
+      .enter()
+        .append('svg')
+        .attr('width',width)
+        .attr('height',height)
+        .attr('id',d=>d.Zone)
+        .call(svg=>{
+          // download
+          svg.append('path')
+            .attr('d', d=>{
+              return symbol.size(symbolScale(d.Download))();
+            })
+            .attr('transform',d=>{
+              const h = symbolHeight(symbolScale(d.Download));
+              console.log(h/2 , symbolScale(d.Download));
+              return `translate(${width/3},${height/2}) rotate(180)`
+            });
+
+          // upload
+          svg.append('path')
+            .attr('d', d=>{
+              return symbol.size(symbolScale(d.Upload))();
+            })
+            .attr('transform',d=>{
+              const h = symbolHeight(symbolScale(d.Upload));
+              console.log(h/2, symbolScale(d.Upload));
+              return `translate(${2 * width/3},${height/2})`
+            });
+          
+        })
+
+    console.log(symbolScale.ticks(3))
+    d3.select('body')
+      .append('svg')
+      .attr('width', 600)
+      .attr('height', 1000)
+      .selectAll('g')
+        .data(symbolScale.ticks)
+      .enter()
+        .append('g')
+        .attr('transform', (d,i)=>`translate( 0, ${height + i*height} )`)
+        .call((keyGroup)=>{
+          keyGroup
+            .append('text')
+            .attr('dx',width)
+            .text( (d,i)=>`${d},${i}` )
+          
+          keyGroup
+            .append('path')
+            .attr('transform', `translate(${width/2},0)`)
+            .attr('d', d=>symbol.size(symbolScale(d))());
+
+        })
+
+  })
+</script>
+</html>

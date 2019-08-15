@@ -1,0 +1,85 @@
+<html>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<body></body>
+<script>
+const width = 45.5;
+const height = 45.5;
+
+d3.tsv('family-population.tsv')
+// popultion = Nuclear family members	+ Not in nuclear families
+    .then(data=>{
+        console.log(data);
+        const popMax = d3.max(data, d=>Number(d.Population));
+        console.log(popMax)
+        const scale = d3.scaleSqrt()
+            .domain([0, popMax])
+            .range([0, (width-3)/2]);
+
+        d3.select('body')
+            .selectAll('svg')
+            .data(data)
+                .enter()
+            .append('svg')
+                .attr('width',width)
+                .attr('height',height)
+                .attr('id',d=>d.Area)
+                .each(function(datum){
+                    const svg = d3.select(this);
+                    const radius = scale(Number(datum.Population));
+                    console.log(radius)
+                    const dataArray = [
+                        Number(datum['Nuclear family members']),
+                        Number(datum['Not in nuclear families, males']) + Number(datum['Not in nuclear families, females'])
+                    ]
+                    const arcs = d3.pie().sort((a,b)=>{return 0})(dataArray)
+                    svg.selectAll('g')
+                        .data(arcs)
+                        .enter()
+                        .append('g')
+                            .attr('transform',`translate(${width/2},${height/2})`)
+                        .append('path')
+                            .attr('d',d=>d3.arc()({
+                                innerRadius: 0,
+                                outerRadius: radius,
+                                startAngle: d.startAngle,
+                                endAngle:d.endAngle
+                            }))
+                            .attr('fill',(d,i)=>{
+                                if(i==0){
+                                    return 'none';
+                                }
+                            })
+                            .attr('stroke',(d,i)=>{
+                                if(i==0){
+                                    return 'black';
+                                }
+                            });
+
+                    console.log(arcs);
+                });
+
+        d3.select('body')
+            .append('svg')
+                .attr('width',400)
+                .attr('height', 400)
+            .selectAll('circle')
+                .data(scale.ticks(5))
+           .enter()
+                .append('g')
+                    .attr('transform',(d,i)=>`translate(${0},${(i+1) * height})`)
+                .call(group=>{
+                    group.append('circle')
+                        .attr('cx', width/2)
+                        .attr('cy', height/2)
+                        .attr('r', d=>scale(d));
+
+                    group.append('text')
+                        .attr('dx', width)
+                        .attr('dy', height/2)
+                        .text(d=>d)
+                })
+
+
+    });
+
+</script>

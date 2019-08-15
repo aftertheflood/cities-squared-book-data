@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="200" height="200" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-21.9077,9.06828)">
+        <g transform="matrix(1,0,0,1,47.4038,45.7867)">
+            <rect x="0" y="0" width="57.692" height="57.692" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,47.4742,103.219)">
+            <rect x="24.834" y="24.834" width="8.024" height="8.024" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-281.745,-266.943)">
+            <text x="373.301px" y="402.867px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">300 Hectares</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-280.77,-238.416)">
+            <text x="392.924px" y="341.748px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">15000 Hectare</text>
+            <text x="471.645px" y="341.748px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">s</text>
+        </g>
+    </g>
+</svg>

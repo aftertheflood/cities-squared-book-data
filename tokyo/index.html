@@ -1,0 +1,83 @@
+<html>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<body></body>
+<script>
+const width = 45.5;
+const height = 45.5;
+const spaceProp = 'floorspace m3';
+const valueProp = 'residential value 2018 \'000 yen / m3';
+const symbol = d3.symbol()
+  .type(d3.symbolTriangle)
+
+d3.tsv('land-value-vs-floorspace.tsv')
+    .then(data=>{
+        const spaceAverage = d3.mean(data,d=>d[spaceProp]);
+        const valueAverage = d3.mean(data,d=>d[valueProp]);
+
+        const differenceData = data.map(d=>{
+            return {
+                d,
+                ward: d.Ward.split('-')[0],
+                valueDif: d[valueProp] - valueAverage,
+                spaceDif: d[spaceProp] - spaceAverage
+            }
+        });
+
+        const valueDomain = d3.extent(differenceData, d=>d.valueDif);
+        const spaceDomain = d3.extent(differenceData, d=>d.spaceDif);
+
+        const absValueMax = Math.max(Math.abs(valueDomain[0]),Math.abs(valueDomain[1]))
+        const absSpaceMax = Math.max(Math.abs(spaceDomain[0]),Math.abs(spaceDomain[1]))
+
+        const valueScale = d3.scaleLinear()
+            .domain([0, absValueMax])
+            .range([width/2, width +width/2])
+
+        const spaceScale = d3.scaleLinear()
+            .domain([0, absSpaceMax])
+            .range([height/2, height+ height/2])
+
+        console.log(differenceData);
+
+        d3.select('body')
+            .selectAll('svg')
+            .data(differenceData)
+            .enter()
+            .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .attr('id', d=>d.ward)
+            .call(svg=>{
+
+                const g = svg.append('g')
+                    .attr('transform',d=>{
+                        const lineX = valueScale(d.valueDif) - width/2;
+                        const lineY = spaceScale(d.spaceDif) - height/2;
+                        return `translate(${ - lineX/2},${ - lineY/2})`
+                    });
+                g.append('line')
+                    .attr('x1', d=> width/2)
+                    .attr('y1', d=> height/2)
+                    .attr('x2', d=> valueScale(d.valueDif))
+                    .attr('y2', d=> spaceScale(d.spaceDif))
+                    .attr('stroke','black');
+
+                g.append('g')
+                        .attr('transform', d=>`translate(${valueScale(d.valueDif)},${spaceScale(d.spaceDif)})`)
+                    .append('path')
+                        .attr('d', symbol.size(20)())
+                        .attr('transform',d=>{
+                            const x = width/2 - valueScale(d.valueDif);
+                            const y = height/2 - spaceScale(d.spaceDif);
+                            let degrees = - Math.atan( x / y ) * 57.29578;
+                            if(x<0 && y<0 || x>=0 && y <0 ){
+                                degrees+=180
+                            }
+                            return`rotate(${degrees})`;
+                        });
+            })
+
+
+    });
+
+</script>

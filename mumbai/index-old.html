@@ -1,0 +1,151 @@
+<html>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<h1>HDI choropleth</h2>
+<svg width="0" height="0" id="patterns">
+    <defs>
+        <pattern id="circles-1" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSJ3aGl0ZSIgLz4KICA8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMSIgZmlsbD0iIzU1OTRlNyIvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="circles-2" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8Y2lyY2xlIGN4PScxLjUnIGN5PScxLjUnIHI9JzEuNScgZmlsbD0nIzU1OTRlNycvPgo8L3N2Zz4K" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="circles-3" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8Y2lyY2xlIGN4PScyJyBjeT0nMicgcj0nMicgZmlsbD0nIzU1OTRlNycvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="circles-4" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8Y2lyY2xlIGN4PScyLjUnIGN5PScyLjUnIHI9JzIuNScgZmlsbD0nIzU1OTRlNycvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="circles-5" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8Y2lyY2xlIGN4PSczJyBjeT0nMycgcj0nMycgZmlsbD0nIzU1OTRlNycvPgo8L3N2Zz4K" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="circles-6" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8Y2lyY2xlIGN4PSczLjUnIGN5PSczLjUnIHI9JzMuNScgZmlsbD0nIzU1OTRlNycvPgo8L3N2Zz4K" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="circles-7" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8Y2lyY2xlIGN4PSc0JyBjeT0nNCcgcj0nNCcgZmlsbD0nIzU1OTRlNycvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="circles-8" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8Y2lyY2xlIGN4PSc0LjUnIGN5PSc0LjUnIHI9JzQuNScgZmlsbD0nIzU1OTRlNycvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="circles-9" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8Y2lyY2xlIGN4PSc1JyBjeT0nNScgcj0nNScgZmlsbD0nIzU1OTRlNycvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+
+        <pattern id="diagonal-stripe-1" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9JyM1NTk0ZTcnIHN0cm9rZS13aWR0aD0nMScvPgo8L3N2Zz4K" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="diagonal-stripe-2" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9JyM1NTk0ZTcnIHN0cm9rZS13aWR0aD0nMicvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="diagonal-stripe-3" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9JyM1NTk0ZTcnIHN0cm9rZS13aWR0aD0nMycvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="diagonal-stripe-4" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPScjNTU5NGU3Jy8+CiAgPHBhdGggZD0nTS0xLDEgbDIsLTIKICAgICAgICAgICBNMCwxMCBsMTAsLTEwCiAgICAgICAgICAgTTksMTEgbDIsLTInIHN0cm9rZT0nd2hpdGUnIHN0cm9rZS13aWR0aD0nMycvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="diagonal-stripe-5" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPScjNTU5NGU3Jy8+CiAgPHBhdGggZD0nTS0xLDEgbDIsLTIKICAgICAgICAgICBNMCwxMCBsMTAsLTEwCiAgICAgICAgICAgTTksMTEgbDIsLTInIHN0cm9rZT0nd2hpdGUnIHN0cm9rZS13aWR0aD0nMicvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+        <pattern id="diagonal-stripe-6" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPScjNTU5NGU3Jy8+CiAgPHBhdGggZD0nTS0xLDEgbDIsLTIKICAgICAgICAgICBNMCwxMCBsMTAsLTEwCiAgICAgICAgICAgTTksMTEgbDIsLTInIHN0cm9rZT0nd2hpdGUnIHN0cm9rZS13aWR0aD0nMScvPgo8L3N2Zz4=" x="0" y="0" width="10" height="10"></image>
+        </pattern>
+    </defs>
+</svg>
+<div class="viz">
+</div>
+<div class="key"></div>
+<style>
+.viz svg {
+    margin:30; border:1px solid grey;
+}
+</style>
+<script>
+const width = 45.5; 
+const height = 45.5;
+
+const patternScale = d3.scaleLinear()
+    .range([1, 9])
+    .domain([0, 1]);
+
+const patterns = {};
+
+d3.selectAll('pattern').each(function(){
+    console.log(this);
+    const pattern = d3.select(this);
+    
+    const id = pattern.attr('id');
+    const href = pattern.select('image').attr('xlink:href');
+    patterns[id] = href;
+})
+
+d3.tsv('/mumbai/hdi-by-ward.tsv')
+    .then(data=>{
+        console.log(data);
+        const svgs = d3.select('.viz')
+            .selectAll('svg')
+                .data(data)
+                .enter()
+            .append('svg')
+                .attr('width', width)
+                .attr('height', width)
+                .attr('id', d=>`${d.Ward}-[${d.HDI}]`)
+            
+        svgs.append('rect')
+            .attr('x', -7)
+            .attr('y', -7)
+            .attr('width', width + 20)
+            .attr('height', height + 20)
+            .attr('fill', d=>`url(#circles-${ Math.round(patternScale(Number(d.HDI))) })`);
+        
+        svgs.append('defs')
+            .selectAll('pattern')
+            .data(Object.keys(patterns))
+            .enter()
+            .append('pattern')
+                .attr('id',d=>d)
+                .attr('patternUnits','userSpaceOnUse')
+                .attr('width', 10)
+                .attr('height', 10)
+            .append('image')
+                .attr('xlink:href',d=>patterns[d])
+                .attr('x',0)
+                .attr('y',0)
+                .attr('width',10)
+                .attr('height',10);
+
+        d3.select('.key')
+            .append('svg')
+            .attr('id','key')
+            .attr('height', 1000)
+            .selectAll('rect')
+            .data(d3.range(1, 10,1))
+                .enter()
+            .append('rect')
+                .attr('id', (d)=>patternScale.invert(d))
+                .attr('x', 0)
+                .attr('y', (d,i)=>i*height*2)
+                .attr('width', width*2)
+                .attr('height', height*2)
+                .attr('fill', d=>`url(#circles-${ d })`);    
+        
+        d3.select('.key svg')
+            .append('defs')
+                .selectAll('pattern')
+                .data(Object.keys(patterns))
+                .enter()
+                .append('pattern')
+                    .attr('id',d=>d)
+                    .attr('patternUnits','userSpaceOnUse')
+                    .attr('width', 10)
+                    .attr('height', 10)
+                .append('image')
+                    .attr('xlink:href',d=>patterns[d])
+                    .attr('x',0)
+                    .attr('y',0)
+                    .attr('width',10)
+                    .attr('height',10);
+    });
+
+
+</script>
+</html>

@@ -1,0 +1,84 @@
+<html>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<h1>HDI choropleth</h2>
+<div class="viz">
+</div>
+<div class="key"></div>
+<style>
+.viz svg {
+    margin:30;
+}
+</style>
+<script>
+const width = 45.5; 
+const height = 45.5;
+
+const patternScale = d3.scaleLinear()
+    .range([1, 9])
+    .domain([0, 1]);
+
+const patterns = {};
+
+d3.selectAll('pattern').each(function(){
+    console.log(this);
+    const pattern = d3.select(this);
+    
+    const id = pattern.attr('id');
+    const href = pattern.select('image').attr('xlink:href');
+    patterns[id] = href;
+})
+
+d3.tsv('hdi-by-ward.tsv')
+    .then(data=>{
+        console.log(data);
+        const svgs = d3.select('.viz')
+            .selectAll('svg')
+                .data(data)
+                .enter()
+            .append('svg')
+                .attr('width', width)
+                .attr('height', width)
+                .attr('id', d=>`${d.Ward}-[${d.HDI}]`)
+        
+        const spacing = 4;
+        const thicknessScale = d3.scaleLinear()
+            .domain([0, 1])
+            .range([0, spacing]);
+
+        const lines = d3.range(-50, 50, spacing);
+
+        svgs.each(function(datum){
+                const svg = d3.select(this);
+                // create the lines and spacing
+                console.log(datum.HDI, thicknessScale(datum.HDI))
+                svg.append('defs')
+                    .append('mask')
+                        .attr('id',(d,i)=>`mask-${i}`)
+                    .append('rect')
+                        .attr('x',0)
+                        .attr('y',0)
+                        .attr('width',width)
+                        .attr('height',height)
+
+                svg.selectAll('line')
+                    .data(lines)
+                    .enter()
+                    .append('g')
+                        .attr('transform','rotate(45)')
+                    .append('line')
+                        .attr('mask',(d,i)=>`url(#mask-${i})`)
+                        .attr('x1', -20)
+                        .attr('y1', d=>d)
+                        .attr('x2', width+20)
+                        .attr('y2', d=>d)
+                        .attr('stroke', 'black')
+                        .attr('stroke-width', thicknessScale(datum.HDI))
+                        
+                        
+                console.log(lines);
+            })
+    });
+
+
+</script>
+</html>

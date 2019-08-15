@@ -1,0 +1,450 @@
+{
+    "aberdeen": {
+      "areaname": [
+        "aberdeen"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        58.61
+      ],
+      "fillKey": [
+        "(39,42]"
+      ]
+    },
+    "aberdeenshire": {
+      "areaname": [
+        "aberdeenshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        60.36
+      ],
+      "fillKey": [
+        "(39,42]"
+      ]
+    },
+    "angus": {
+      "areaname": [
+        "angus"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        56.32
+      ],
+      "fillKey": [
+        "(42,45]"
+      ]
+    },
+    "argyll_and_bute": {
+      "areaname": [
+        "argyll_and_bute"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        48.52
+      ],
+      "fillKey": [
+        "(39,42]"
+      ]
+    },
+    "clackmannanshire": {
+      "areaname": [
+        "clackmannanshire"    
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        53.79
+      ],
+      "fillKey": [
+        "(45,47]"
+      ]
+    },
+    "dumfries_and_galloway": {
+      "areaname": [
+        "dumfries_and_galloway"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        65.67
+      ],
+      "fillKey": [
+        "(32,39]"
+      ]
+    },
+    "dundee": {
+      "areaname": [
+        "dundee"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        42.65
+      ],
+      "fillKey": [
+        "(54,58]"
+      ]
+    },
+    "east_ayrshire": {
+      "areaname": [
+        "east_ayrshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        52.78
+      ],
+      "fillKey": [
+        "(47,50]"
+      ]
+    },
+    "east_dunbartonshire": {
+      "areaname": [
+        "east_dunbartonshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        61.2
+      ],
+      "fillKey": [
+        "(32,39]"
+      ]
+    },
+    "east_lothian": {
+      "areaname": [
+        "east_lothian"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        61.72
+      ],
+      "fillKey": [
+        "(32,39]"
+      ]
+    },
+    "east_renfrewshire": {
+      "areaname": [
+        "east_renfrewshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        63.19
+      ],
+      "fillKey": [
+        "(32,39]"
+      ]
+    },
+    "edinburgh": {
+      "areaname": [
+        "edinburgh"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        61.1
+      ],
+      "fillKey": [
+        "(39,42]"
+      ]
+    },
+    "eilean_siar": {
+      "areaname": [
+        "eilean_siar"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        53.42
+      ],
+      "fillKey": [
+        "(45,47]"
+      ]
+    },
+    "falkirk": {
+      "areaname": [
+        "falkirk"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        53.47
+      ],
+      "fillKey": [
+        "(45,47]"
+      ]
+    },
+    "fife": {
+      "areaname": [
+        "fife"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        55.05
+      ],
+      "fillKey": [
+        "(42,45]"
+      ]
+    },
+    "glasgow": {
+      "areaname": [
+        "glasgow"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        46.51
+      ],
+      "fillKey": [
+        "(50,54]"
+      ]
+    },
+    "highland": {
+      "areaname": [
+        "highland"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        52.92
+      ],
+      "fillKey": [
+        "(45,47]"
+      ]
+    },
+    "inverclyde": {
+      "areaname": [
+        "inverclyde"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        50.08
+      ],
+      "fillKey": [
+        "(47,50]"
+      ]
+    },
+    "midlothian": {
+      "areaname": [
+        "midlothian"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        56.3
+      ],
+      "fillKey": [
+        "(42,45]"
+      ]
+    },
+    "moray": {
+      "areaname": [
+        "moray"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        57.56
+      ],
+      "fillKey": [
+        "(42,45]"
+      ]
+    },
+    "north_ayrshire": {
+      "areaname": [
+        "north_ayrshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        51.01
+      ],
+      "fillKey": [
+        "(47,50]"
+      ]
+    },
+    "north_lanarkshire": {
+      "areaname": [
+        "north_lanarkshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        48.93
+      ],
+      "fillKey": [
+        "(50,54]"
+      ]
+    },
+    "orkney_islands": {
+      "areaname": [
+        "orkney_islands"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        67.2
+      ],
+      "fillKey": [
+        "(32,39]"
+      ]
+    },
+    "perth_and_kinross": {
+      "areaname": [
+        "perth_and_kinross"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        60.19
+      ],
+      "fillKey": [
+        "(39,42]"
+      ]
+    },
+    "renfrewshire": {
+      "areaname": [
+        "renfrewshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        52.81
+      ],
+      "fillKey": [
+        "(45,47]"
+      ]
+    },
+    "scottish_borders": {
+      "areaname": [
+        "scottish_borders"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        66.56
+      ],
+      "fillKey": [
+        "(32,39]"
+      ]
+    },
+    "shetland_islands": {
+      "areaname": [
+        "shetland_islands"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        63.71
+      ],
+      "fillKey": [
+        "(32,39]"
+      ]
+    },
+    "south_ayrshire": {
+      "areaname": [
+        "south_ayrshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        57.87
+      ],
+      "fillKey": [
+        "(42,45]"
+      ]
+    },
+    "south_lanarkshire": {
+      "areaname": [
+        "south_lanarkshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        54.67
+      ],
+      "fillKey": [
+        "(45,47]"
+      ]
+    },
+    "stirling": {
+      "areaname": [
+        "stirling"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        59.77
+      ],
+      "fillKey": [
+        "(39,42]"
+      ]
+    },
+    "west_dunbartonshire": {
+      "areaname": [
+        "west_dunbartonshire"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        46.04
+      ],
+      "fillKey": [
+        "(50,54]"
+      ]
+    },
+    "west_lothian": {
+      "areaname": [
+        "west_lothian"
+      ],
+      "measure": [
+        "yes_vote"
+      ],
+      "percentage": [
+        55.18
+      ],
+      "fillKey": [
+        "(42,45]"
+      ]
+    }
+  }
