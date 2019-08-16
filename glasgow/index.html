@@ -34,13 +34,13 @@ d3.csv('population-by-ward.csv')
     const ext = multiExtent(wards, categories);
 
     const valueScale = d3.scaleLinear()
-        .domain([0,ext[1]])
+        .domain([0,16500])
         .range([0, height]);
 
     const categoryScale = d3.scaleBand()
         .domain(categories)
-        .range([0, width])
-        .padding(0.3);
+        .range([0, 30.831])
+        .paddingInner(0.0195*7);
 
     console.log(ext);
     d3.select('body')

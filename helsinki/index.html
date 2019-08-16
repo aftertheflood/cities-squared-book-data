@@ -1,0 +1,177 @@
+<html>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/speakingurl@14.0.1/speakingurl.min.js"></script>
+<style>
+svg{
+    margin:10px;
+    margin-bottom:50px;
+}
+</style>
+<body>
+<div class="overview"></div>
+<div class="breakdown"></div>
+</body>
+<script>
+const width = 45.5;
+const height = 45.5;
+const multiExtent = (data, keys)=>{
+  let min;
+  let max;
+  for (let row of data){
+    const values = keys.map(k=>Number(row[k]));
+    const extent = d3.extent(values);
+    if(!min) {min = extent[0];}
+    if(!max) {max = extent[1];}
+    min = Math.min(min, extent[0]);
+    max = Math.max(max, extent[1]);
+  }
+  return [min, max];
+}
+
+const yearList = ['1990', '2000', '2010', '2015', '2018', '2028'];
+
+const buildTimeSeries = (row, years) => {
+    return {
+        area: row.area,
+        population: years
+            .map(year=>{
+                if(row[year]){
+                    return {
+                        date: new Date(year, 0, 1),
+                        value: Number(row[year])
+                    }
+                }
+            })
+            .filter(d => d!=undefined)
+    }
+};
+
+d3.csv('Helsinki population projection districts.csv')
+    .then(data=>{
+        const dataExtent = multiExtent(data, yearList)
+        const timeExtent = d3.extent(yearList, d=>new Date(d, 0, 1));
+
+        const valueScale = d3.scaleLinear()
+            .domain([0, dataExtent[1]])
+            .range([height, 0]);
+        
+        const timeScale = d3.scaleTime()
+            .domain(timeExtent)
+            .range([0, width]);            
+
+        const timeSeries = data.map(d=>buildTimeSeries(d, yearList));
+        
+        const area = d3.area()
+            .curve(d3.curveBasis)
+            .y0(d => valueScale(d.value))
+            .y1(d => height)
+            .x(d => timeScale(d.date));
+        
+        const line = d3.area()
+            .curve(d3.curveBasis)
+            .y(d => valueScale(d.value))
+            .x(d => timeScale(d.date));
+
+    console.log(valueScale.domain())
+
+        d3.select('.overview')
+            .selectAll('svg')
+            .data(timeSeries)
+            .enter()
+            .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .attr('id', d=>`overview-${getSlug(d.area)}`)
+            .call(svg=>{
+                svg.append('path')
+                    .attr('d', d=>area( d.population.filter(d => d.date.getFullYear() != 2028) ))
+                    .attr('fill', 'black')
+                    .attr('stroke', 'none');
+
+                svg.append('path')
+                    .attr('d', d=>area( d.population.filter(d => d.date.getFullYear() > 2017) ))
+                    .attr('fill', 'grey')
+                    .attr('stroke', 'none');
+
+                svg.append('path')
+                    .attr('d', d=>line( d.population.filter(d => d.date.getFullYear() != 2028) ))
+                    .attr('fill', 'none')
+                    .attr('stroke', 'black');
+
+                svg.append('path')
+                    .attr('d', d=>line( d.population.filter(d => d.date.getFullYear() > 2017) ))
+                    .attr('fill', 'none')
+                    .attr('stroke', 'black');
+
+            });
+    });
+
+d3.csv('Helsinki population projection subdistricts.csv')
+    .then(data=>{
+
+        const dataExtent = multiExtent(data, yearList)
+        const timeExtent = d3.extent(yearList, d=>new Date(d, 0, 1));
+
+        const timeSeries = data.map(d=>buildTimeSeries(d, yearList))
+            .reduce((acc, current)=>{
+                if(!acc[current.area]){
+                    acc[current.area] = [];
+                }
+                acc[current.area].push(current.population);
+                return acc;
+            }, {});
+
+        const valueScale = d3.scaleLinear()
+            .domain([0, dataExtent[1]])
+            .range([height, 0]);
+        
+        const timeScale = d3.scaleTime()
+            .domain(timeExtent)
+            .range([0, width]);    
+
+                console.log('breakdown' , valueScale.domain())
+
+        const area = d3.area()
+            .curve(d3.curveBasis)
+            .y0(d => valueScale(d.value))
+            .y1(d => height)
+            .x(d => timeScale(d.date));
+        
+        const line = d3.area()
+            .curve(d3.curveBasis)
+            .y(d => valueScale(d.value))
+            .x(d => timeScale(d.date));
+
+        d3.select('.breakdown')
+            .selectAll('svg')
+            .data(Object.entries(timeSeries))
+            .enter()
+            .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .attr('id', d=>`breakdown-${getSlug(d[0])}`)
+            .each(function([key, datum]){
+                const svg = d3.select(this)
+                svg.selectAll('g')
+                    .data(datum)
+                    .enter()
+                    .append('g')
+                    .call(g=>{
+                        g.append('path')
+                            .attr('d', d=>{
+                                return line( d.filter(d => d.date.getFullYear() != 2028) );
+                            })
+                            .attr('fill', 'none')
+                            .attr('stroke', 'black');
+                        
+                        g.append('path')
+                            .attr('d', d=>line( d.filter(d => d.date.getFullYear() > 2017) ))
+                            .attr('fill', 'none')
+                            .attr('stroke', 'black');
+                    })
+            });
+            
+    });
+</script>
+</html>
+
